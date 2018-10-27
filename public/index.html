@@ -162,15 +162,16 @@
           <hr>
           <p><b>แบรนด์สุดฮิต</b> อัพเดทใหม่วันนี้</p>
           
-          <ons-row>
+          
               <div id="allPr"></div>
             
             
            <script id="allPr_template" type="text/template"> 
+<ons-row>
           <% allPr.forEach(function(allPr){
             var item = allPr.data();
             %>  
-            <ons-col width="100%">
+            <ons-col width="50%">
               <ons-card>
                 <img src="<%=item.photo%>" alt="Onsen UI" style="width: 100%">
                 <div class="title">
