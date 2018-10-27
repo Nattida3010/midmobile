@@ -181,28 +181,30 @@
     });
   
     function getHomeData() {
-    var docRef = db.collection("UI").doc("home");
-    docRef.get().then(function(doc) {
-    if (doc.exists) {
-        //Display data
-        console.log("Document data:", doc.data());
-        var data = doc.data();
-        $('#appname').html(data.appname);
-        var style = "background: url('" + data.slides[0] + "') no-repeat center; background-size: contain;'";
-        $('#carousel1').attr('style', style)
-        var style = "background: url('" + data.slides[1] + "') no-repeat center; background-size: contain;'";
-        $('#carousel2').attr('style', style)
-        var style = "background: url('" + data.slides[2] + "') no-repeat center; background-size: contain;'";
-        $('#carousel3').attr('style', style)
-        var icon_template = $('#icon_template').html();
-        var html = ejs.render(icon_template, {categories : data.categories});
-        $('#icons').html(html);
-    } else {
-        console.log("No such document!");
-    }
-    }).catch(function(error) {
-    console.log("Error getting document:", error);
-    });
+      $.getJSON('home.json', function (data) {
+        var docRef = db.collection("UI").doc("home");
+        docRef.get().then(function (doc) {
+          if (doc.exists) {
+            //Display data
+            console.log("Document data:", doc.data());
+            var data = doc.data();
+            $('#appname').html(data.appname);
+            //var style = "background: url('" + data.slides[0] + "') no-repeat center; background-size: contain;'"; 
+            var style = "background: url('images/" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+            $('#carousel1').attr('style', style)
+            var style = "background: url('images/" + data.slides[1] + "') no-repeat center; background-size: contain;'";
+            $('#carousel2').attr('style', style)
+            var style = "background: url('images/" + data.slides[2] + "') no-repeat center; background-size: contain;'";
+            $('#carousel3').attr('style', style)
+            var icon_template = $('#icon_template').html();
+            var html = ejs.render(icon_template, { categories: data.categories });
+            $('#icons').html(html);
+          } else {
+            console.log("No such document!");
+          }
+        }).catch(function (error) {
+          console.log("Error getting document:", error);
+        });
         /*
         console.log(data);
         $('#appname').html(data.appname);
@@ -214,8 +216,8 @@
       });
       */
   
-    //   })
-    // }
+      })
+    }
     function getCartData() {
       $.getJSON('cart.json', function (data) {
         console.log(data);
