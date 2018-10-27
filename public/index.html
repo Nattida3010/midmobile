@@ -55,7 +55,7 @@
         </div>
       </ons-toolbar>
   
-      <ons-tabbar swipeable position="auto">
+      <ons-tabbar swipeable position="auto" id="tabbar">
         <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
         </ons-tab>
         <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
@@ -84,8 +84,8 @@
         <script id="icon_template" type="text/template">
           <ons-row style="height:120px" vertical-align="center">  
           <% categories.forEach(function(category){%>  
-          <ons-col style="background:#294644; border:solid 1px white;color: white;" width="33%">
-      <p style="text-align: center; margin: 10px;" onclick = "getAllProduct();" value=" <%= category.name %>" id="titleP">
+          <ons-col style="background:#294644; border:solid 1px white;color: white;" width="33%"onclick="changeTab('<%= category.name %>')">
+      <p style="text-align: center; margin: 10px;" >
               <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
             </p>
             <p style="text-align: center; margin: 10px;" id="icon1_text">
@@ -204,12 +204,25 @@
         // get data for cart screen  
         getCartData();
       }else if (event.index == 2) {
+
         console.log('All product clicked');
+        var name1 = localStorage.getItem('name');
+        console.log("test"+name1)
         // get data for all product screen  
-        getAllProduct();
+        if(name1==null){
+          console.log(name1)
+          getAllProduct();}
+        else{
+
+          getAllProduct(name1);
+        }
+        localStorage.clear();
       }
     });
-  
+    function changeTab(name) {
+      localStorage.setItem('name', name);
+  document.getElementById('tabbar').setActiveTab(2);
+}
     function getHomeData() {
       $.getJSON('home.json', function (data) {
         var docRef = db.collection("UI").doc("home");
@@ -254,8 +267,9 @@
       });
     }
   
-    function getAllProduct() {
+    function getAllProduct(name1) {
       //Get all product firebase
+      if(name1==null){
       var apr = db.collection("PRODUCTS")//.where("category", "==", "sport"); //เลือกเฉพาะ
     apr.get().then(function (querySnapshot) {
       /*querySnapshot.forEach(function (doc) {
@@ -272,7 +286,24 @@
       console.log(querySnapshot);
       var html = ejs.render(allPr_template, { allPr: querySnapshot.docs });
       $('#allPr').html(html);
-    })
+    })}
+    else{var apr = db.collection("PRODUCTS").where("category","==",name1);//.where("category", "==", "sport"); //เลือกเฉพาะ
+    apr.get().then(function (querySnapshot) {
+      /*querySnapshot.forEach(function (doc) {
+        var data = doc.data();
+        console.log(data);
+        var allP_template = $('#allP_template').html();
+        querySnapshot
+        var html = ejs.render(allP_template, { allP: data });
+        console.log(html);
+        $('#allP').html(html);
+        
+      })*/
+      var allPr_template = $('#allPr_template').html();
+      console.log(querySnapshot);
+      var html = ejs.render(allPr_template, { allPr: querySnapshot.docs });
+      $('#allPr').html(html);
+    })}
   }
       function addNewData() {
         var data = {
