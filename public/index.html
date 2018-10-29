@@ -38,8 +38,8 @@
         color:antiquewhite(121, 175, 189);
       }
 
-      
-    </style>
+ 
+       </style>
   </head>
   
   
@@ -86,7 +86,7 @@
         <script id="icon_template" type="text/template">
           <ons-row style="height:120px" vertical-align="center">  
           <% categories.forEach(function(category){%>  
-          <ons-col style="background:#294644; border:solid 1px white;color: white;" width="33%"onclick="changeTab('<%= category.name %>')">
+          <ons-col style="background:<%= category.color %>; border:solid 1px white;color: white;" width="33%"onclick="changeTab('<%= category.name %>')">
       <p style="text-align: center; margin: 10px;" >
               <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
             </p>
@@ -177,11 +177,12 @@
               <ons-card>
                 <img src="<%=item.photo%>" alt="Onsen UI" style="width: 100%">
                 <div class="title">
-                  <%=item.title%>
+                  <%=item.title%> 
                 </div>
                 <div class="content" id="Pdetail">
                   Price: <%= item.price %>
                 </div>
+                
               </ons-card>
             </ons-col>
             <%});%>
