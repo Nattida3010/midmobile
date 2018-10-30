@@ -412,13 +412,13 @@
     let query = needle.toLowerCase();
     return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
   }
-  console.log("55+",filterItems(search, data));
+  console.log("test4",filterItems(search, data));
   var item=filterItems(search, data);
   console.log("xxx",item)
   localStorage.setItem('items', item);
   
 
-  console.log('tong',item);
+  console.log('test1',item);
   
 test(item);
 
@@ -443,11 +443,11 @@ document.getElementById('tabbar').setActiveTab(2);
 
 
 function test(title){
-console.log("888",title);
+console.log("test2",title);
 // for(var i =0;i<tests.length;i++){
     
  
-    console.log('tset',title);
+    console.log('test3',title);
 
         // doc.data() is never undefined for query doc snapshots
         
