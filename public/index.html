@@ -62,7 +62,7 @@
       <ons-tabbar  swipeable position="auto" id="tabbar" >
         <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="1" active>
         </ons-tab>
-        <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
+        <ons-tab  class="noticart" page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
         </ons-tab>
         <ons-tab page="tab3.html" label="AllProduct" icon="fa-star" active-icon="fa-star">
         </ons-tab>
@@ -74,6 +74,7 @@
     <template id="tab1.html">
       <ons-page id="Tab1">
         <p style="text-align: center; margin-top: 60px;">
+          
           <ons-search-input placeholder="Search" onchange="search(this.value)"></ons-search-input>
         </p>
         <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px; margin-top:10px; ">
@@ -153,17 +154,16 @@
         <hr>
        
   
-        <ons-row>
-          <div id="allPr"></div>
+        <div id="allPr"></div>
   
   
           <script id="allPr_template" type="text/template"> 
-              <ons-row>
+              <ons-row width="50%">
             <% allPr.forEach(function(allPr){
               var item = allPr.data();
               %>  
               <ons-col width="100%" onclick="getDetail('<%=item.title%>');" >
-                <ons-card>
+                  <ons-card style="width:65%; height:65%;" >
                   <img src="<%=item.photo[0]%>" alt="Onsen UI" style="width: 100%">
                   <div class="title">
                     <%=item.title%>
@@ -173,10 +173,10 @@
                   </div>
                 </ons-card>
               </ons-col>
-              <%});%></ons-row>
+              <%});%>
+            </ons-row>
             </script>
-  
-  
+        
       </ons-page>
     </template>
   
@@ -200,7 +200,7 @@
                   <ons-card>
                     <% dataDep.forEach(function(dataDep){   
                             var data = dataDep.data(); %>
-                      <!-- <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
+                      <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
                         
                             <ons-carousel-item id="carousel1DeP" style="background: url('<%= data.photo[0]%>') no-repeat center; background-size: contain;">
                             </ons-carousel-item>
@@ -210,21 +210,22 @@
                             </ons-carousel-item>
               
                      </ons-carousel>
-                           -->
-                           <img src="<%= data.photo%>" >
-                      <div class="title">
-                        <%= data.price%>
-                      </div>
-                      <div class="content">
-                        <div>
-                          <%= data.title %>
-                        </div>
-                        
-                      </div>
-                      <ons-button onclick="addtocart('<%= data.title %>')">Add to Cart</ons-button>
-                      <%})%>
-                    </ons-card>
-                    
+                          
+                           <div class="content">
+                            <div class="title"  ><b><%= data.title %></b></div>
+                              <div ><%= data.price%> ฿</div>
+                            <ons-list>
+                              <ons-list-header><b>Bindings</b></ons-list-header>
+                              <ons-list-item><b>Vue</b>   <%=data.Vue%></ons-list-item>
+                              <ons-list-item><b>Angular</b> <%=data.Angular%></ons-list-item>
+                              <ons-list-item><b>React</b> <%=data.React%> </ons-list-item>
+                            </ons-list>
+                          </div>
+                          <ons-button  onclick="addtocart('<%=data.title%>')">ADD CART</ons-button>
+                          <%})%>
+                          
+                        </ons-card>
+                     
                </script>
               
       </template>
@@ -386,7 +387,9 @@
   var retrievedData = localStorage.getItem("quentinTarantino");
   console.log(retrievedData);
   dataCart.push(retrievedData);
-  alert(dataCart);
+  ons.notification.toast('add success', {
+    timeout: 2000});
+    $('.noticart').attr('badge',dataCart.length)
   }
   
   function getData2cart(){
