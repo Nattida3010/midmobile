@@ -75,7 +75,7 @@
       <ons-page id="Tab1">
         <p style="text-align: center; margin-top: 60px;">
           
-          <ons-search-input placeholder="Search" onchange="search(this.value)"></ons-search-input>
+          <ons-search-input placeholder="Search" onchange="search(this.value)" onfocus ="this.value =''"></ons-search-input>
         </p>
         <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px; margin-top:10px; ">
           <ons-carousel-item id="carousel1" style="background: url('')">
@@ -211,9 +211,10 @@
               
                      </ons-carousel>
                           
-                           <div class="content">
+                           <div class="content" >
                             <div class="title"  ><b><%= data.title %></b></div>
                               <div ><%= data.price%> ฿</div>
+                             
                             <ons-list>
                               <ons-list-header><b>Bindings</b></ons-list-header>
                               <ons-list-item><b>Vue</b>   <%=data.Vue%></ons-list-item>
@@ -221,7 +222,7 @@
                               <ons-list-item><b>React</b> <%=data.React%> </ons-list-item>
                             </ons-list>
                           </div>
-                          <ons-button  onclick="addtocart('<%=data.title%>')">ADD CART</ons-button>
+                         <ons-button  onclick="addtocart('<%=data.title%>')">ADD CART</ons-button>
                           <%})%>
                           
                         </ons-card>
