@@ -149,7 +149,7 @@
     <template id="tab3.html">
       <ons-page id="Tab3">
         <p style="text-align: center; margin-top: 10px;">
-          <ons-search-input id= "search" placeholder="Search" onchange="search(this.value)"></ons-search-input>
+            <ons-search-input placeholder="Search" onchange="search(this.value)" onfocus ="this.value =''"></ons-search-input>
         </p>
         <hr>
        
@@ -184,7 +184,7 @@
         <ons-page>
             <ons-toolbar>
                 <div class="left"><ons-back-button>Back</ons-back-button></div>
-                <div class="center">Detail</div>
+                <div class="center">Detail product</div>
               </ons-toolbar>
           <script>
             var datadep = localStorage.getItem('getDep');
@@ -211,24 +211,22 @@
               
                      </ons-carousel>
                           
-                           <div class="content" >
-                            <div class="title"  ><b><%= data.title %></b></div>
-                              <div ><%= data.price%> ฿</div>
-                             
-                            <ons-list>
-                              <ons-list-header><b>Bindings</b></ons-list-header>
-                              <ons-list-item><b>Vue</b>   <%=data.Vue%></ons-list-item>
-                              <ons-list-item><b>Angular</b> <%=data.Angular%></ons-list-item>
-                              <ons-list-item><b>React</b> <%=data.React%> </ons-list-item>
-                            </ons-list>
-                          </div>
-                         <ons-button  onclick="addtocart('<%=data.title%>')">ADD CART</ons-button>
+                           <div class="conten" >
+                             <br><br>
+                            
+                              <ons-list style="background-color:#bbc3db;color:#F2BEBC;">
+                                  <ons-list-item ><b>NAME PRODUCT :</b> <%= data.title %></ons-list-item>
+                                  <ons-list-item  style="color:#990000;"><b>PRICE PRODUCT :</b> <%= data.price%> ฿</ons-list-item>
+                                  
+                                </ons-list>
+                          <div  align = "center">
+                         <ons-button   onclick="addtocart('<%=data.title%>')">ADD CART</ons-button>
                           <%})%>
-                          
+                         
                         </ons-card>
                      
                </script>
-              
+              </div>
       </template>
     </body>
   
