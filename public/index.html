@@ -188,7 +188,7 @@
   
     <template id="detailP.html">
         <ons-page>
-            <ons-toolbar>
+            <ons-toolbar >
                 <div class="left"><ons-back-button>Back</ons-back-button></div>
                 <div class="center">Detail product</div>
               </ons-toolbar>
@@ -372,7 +372,7 @@
   var retrievedData = localStorage.getItem("quentinTarantino");
   console.log(retrievedData);
   dataCart.push(retrievedData);
-  ons.notification.toast('You have added a product ', {
+  ons.notification.toast('You have added a product !!!', {
     timeout: 1000});
     $('.noticart').attr('badge',dataCart.length)
   }
