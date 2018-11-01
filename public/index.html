@@ -37,7 +37,12 @@
         padding-right: 5px;
         color:antiquewhite(121, 175, 189);
       }
-
+      .page, 
+      .page__background, 
+      .page__content {
+    background-color: rgb(150, 165, 216);
+    position: absolute;
+}
  
        </style>
          
@@ -45,6 +50,7 @@
   
   
   <body>
+      <div class = "page__background">
     <ons-navigator swipeable id="myNavigator">
       <ons-page>  
       <ons-toolbar style="background-color:#bbc3db;color:#F2BEBC;" >
@@ -58,14 +64,14 @@
               </ons-icon>
             </div>
           </ons-toolbar>
-      
-      <ons-tabbar  swipeable position="auto" id="tabbar" >
+    
+      <ons-tabbar  swipeable position="auto" id="tabbar"  style="background-color:#bbc3db;" >
         <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="1" active>
         </ons-tab>
         <ons-tab  class="noticart" page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
         </ons-tab>
         <ons-tab page="tab3.html" label="AllProduct" icon="fa-star" active-icon="fa-star">
-        </ons-tab>
+         </ons-tab>
       </ons-tabbar>
     </ons-page>
   </ons-navigator>
@@ -120,8 +126,7 @@
           <ons-list>
             
           <% cartData.forEach(function(cartData){
-              var cartData = cartData.data(); 
-            %>
+              var cartData = cartData.data();  %>
             <ons-list-item>
               <div class="left">
                 <img class="list-item__thumbnail" src="<%=cartData.photo[0]%>">
@@ -140,7 +145,7 @@
           <%})%>
         </script>
           <p style="text-align: center; margin: 10px;">
-            <ons-button modifier="large">PROCEED TO PAY</ons-button>
+            <ons-button  modifier="large">PROCEED TO PAY</ons-button>
           </p>
         </ons-page>
       </template>
@@ -166,10 +171,10 @@
                   <ons-card style="width:90%; height:90%;" >
                  <center> <img style="width:120px; height:120px;" src="<%=item.photo[0]%>" alt="Onsen UI" style="width: 100%"></center>
                   <div class="title">
-                    <%=item.title%>
+                   Name:  <%=item.title%>
                   </div>
                   <div class="content" id="Pdetail">   
-                    Price: <%= item.price %>
+                    Price:  <%= item.price %> ฿
                   </div>
                 </ons-card>
               </ons-col>
@@ -352,23 +357,23 @@
   
     }
   
-      //addnewdata
-      function addNewData() {
-        var data = {
-          pid: 5,
-          titlee: 'IPhoneXS',
-          price: 5000,
-          category: 'Eletronic'
-        }
-        db.collection("PRODUCTS").add(data)
-          .then(function (docRef) {
-            console.log("Document written with ID: ", docRef.id);
-          })
-          .catch(function (error) {
-            console.error("Error adding document: ", error);
-          });
+      // //addnewdata
+      // function addNewData() {
+      //   var data = {
+      //     pid: 5,
+      //     titlee: 'IPhoneXS',
+      //     price: 5000,
+      //     category: 'Eletronic'
+      //   }
+      //   db.collection("PRODUCTS").add(data)
+      //     .then(function (docRef) {
+      //       console.log("Document written with ID: ", docRef.id);
+      //     })
+      //     .catch(function (error) {
+      //       console.error("Error adding document: ", error);
+      //     });
   
-      }
+      // }
   
       
   
@@ -446,11 +451,10 @@ document.getElementById('tabbar').setActiveTab(2);
 
 
 function test(title){
+
 console.log("test2",title);
-// for(var i =0;i<tests.length;i++){
-    
- 
-    console.log('test3',title);
+
+
 
         // doc.data() is never undefined for query doc snapshots
         
@@ -459,20 +463,7 @@ console.log("test2",title);
         $('#allPr').html(html);
   
 
-// console.log(tests)
-// db.collection("PRODUCTS").where("title", "==",tests).get()
-//       .then(function (querySnapshot) {
-//         // doc.data() is never undefined for query doc snapshots
-//         console.log(querySnapshot.docs);
-//         var test_template = $('#test_template').html();
-//         var html = ejs.render(test_template, { test: querySnapshot.docs });
-//         $('#test').html(html);
-//       })
-//       .catch(function (error) {
-//         console.log("Error getting documents: ", error);
-//       });
-// }}
- }
+
     </script>
   
   </html>
