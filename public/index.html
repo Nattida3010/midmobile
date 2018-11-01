@@ -37,6 +37,13 @@
         padding-right: 5px;
         color:antiquewhite(121, 175, 189);
       }
+      .page, .page__background, .page__content {
+    background-color: #FFE4E1;
+    position: absolute;
+}
+.toast {
+  background-color: #E9967A;
+}
     
        </style>
          
@@ -47,7 +54,7 @@
     
     <ons-navigator swipeable id="myNavigator">
       <ons-page>  
-      <ons-toolbar style="background-color:#bbc3db;color:#F2BEBC;" >
+      <ons-toolbar style="background-color:#5F9EA0;color:#F2BEBC;" >
             <div class="left">
               <ons-icon class="toolbaricon" size="30px" icon="fa-shopping-bag">
               </ons-icon>
@@ -58,13 +65,13 @@
               </ons-icon>
             </div>
           </ons-toolbar>
-          
-      <ons-tabbar  swipeable position="auto" id="tabbar"  style="background-color:#bbc3db;" >
-        <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="1" active>
+        </ons-tabbar><div class="page__background"></div>
+      <ons-tabbar  swipeable position="auto" id="tabbar" style="background-color :#5F9EA0;" >
+        <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="1" active style="background-color:#5F9EA0;">
         </ons-tab>
-        <ons-tab  class="noticart" page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
+        <ons-tab  class="noticart" page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart"  style="background-color:#5F9EA0;">
         </ons-tab>
-        <ons-tab page="tab3.html" label="AllProduct" icon="fa-star" active-icon="fa-star">
+        <ons-tab page="tab3.html" label="AllProduct" icon="fa-star" active-icon="fa-star"  style="background-color: #5F9EA0;">
          </ons-tab>
       </ons-tabbar>
     </ons-page>
@@ -112,7 +119,7 @@
     <!--teb2  -->
     <template id="tab2.html">
         <ons-page id="Tab2">
-          <p><h5><b>Shopping Cart</b></h5></p>
+       <center>  <p><h5><b>Shopping Cart</b></h5></p></center> 
           
     <div id="showDataCart"></div>
     
@@ -126,8 +133,8 @@
                 <img class="list-item__thumbnail" src="<%=cartData.photo[0]%>">
               </div>
               <div class="center">
-                <span class="list-item__title"><%=cartData.title%></span>
-                <span class="list-item__subtitle" style="color: blue"><%=cartData.price%></span>
+                <span class="list-item__title">Name :<%=cartData.title%></span>
+                <span class="list-item__subtitle" style="color: blue">Price :<%=cartData.price%>฿</span>
               </div>
               <div class="right">
                 <p style="text-align: center; margin: 10px;">
@@ -165,10 +172,10 @@
                   <ons-card style="width:90%; height:90%;" >
                  <center> <img style="width:120px; height:120px;" src="<%=item.photo[0]%>" alt="Onsen UI" style="width: 100%"></center>
                   <div class="title">
-                   Name:  <%=item.title%>
+              <center>   Name : <%=item.title%>     </center>
                   </div>
                   <div class="content" id="Pdetail">   
-                    Price:  <%= item.price %> 
+                    <center> Price :  <%= item.price %> ฿     </center>
                   </div>
                 </ons-card>
               </ons-col>
@@ -260,7 +267,9 @@
   
             getproductData(name1);
           }
-          else{}
+          else{
+            getproductData();
+          }
           localStorage.clear();
         }
       });
@@ -351,23 +360,6 @@
   
     }
   
-      // //addnewdata
-      // function addNewData() {
-      //   var data = {
-      //     pid: 5,
-      //     titlee: 'IPhoneXS',
-      //     price: 5000,
-      //     category: 'Eletronic'
-      //   }
-      //   db.collection("PRODUCTS").add(data)
-      //     .then(function (docRef) {
-      //       console.log("Document written with ID: ", docRef.id);
-      //     })
-      //     .catch(function (error) {
-      //       console.error("Error adding document: ", error);
-      //     });
-  
-      // }
   
       
   
@@ -385,8 +377,8 @@
   var retrievedData = localStorage.getItem("quentinTarantino");
   console.log(retrievedData);
   dataCart.push(retrievedData);
-  ons.notification.toast('add success', {
-    timeout: 2000});
+  ons.notification.toast('You have added a product ', {
+    timeout: 1000});
     $('.noticart').attr('badge',dataCart.length)
   }
   
@@ -456,7 +448,7 @@ console.log("test2",title);
          var html = ejs.render(allPr_template, { allPr: title });
         $('#allPr').html(html);
   
-
+}
 
     </script>
   
